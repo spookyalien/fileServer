@@ -1,0 +1,15 @@
+/home/bigadmin/myProgs/C#/fileServer/fileServer/bin/Debug/net7.0/fileServer
+/home/bigadmin/myProgs/C#/fileServer/fileServer/bin/Debug/net7.0/fileServer.deps.json
+/home/bigadmin/myProgs/C#/fileServer/fileServer/bin/Debug/net7.0/fileServer.runtimeconfig.json
+/home/bigadmin/myProgs/C#/fileServer/fileServer/bin/Debug/net7.0/fileServer.dll
+/home/bigadmin/myProgs/C#/fileServer/fileServer/bin/Debug/net7.0/fileServer.pdb
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.csproj.AssemblyReference.cache
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.GeneratedMSBuildEditorConfig.editorconfig
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.AssemblyInfoInputs.cache
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.AssemblyInfo.cs
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.csproj.CoreCompileInputs.cache
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.dll
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/refint/fileServer.dll
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.pdb
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/fileServer.genruntimeconfig.cache
+/home/bigadmin/myProgs/C#/fileServer/fileServer/obj/Debug/net7.0/ref/fileServer.dll

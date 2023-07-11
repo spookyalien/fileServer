@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "dTn3d50Pb9I7X//Z/T78LsIrgiNw9Zgj+Ugb+h69QVrRdaxFLGFocDc5LXlKCFzUbdmHGn/YIV1aPuLa8bxc8A==",
+  "success": true,
+  "projectFilePath": "/home/bigadmin/myProgs/C#/fileServer/fileServer/fileServer.csproj",
+  "expectedPackageFiles": [
+    "/home/bigadmin/.nuget/packages/microsoft.netcore.app.ref/7.0.8/microsoft.netcore.app.ref.7.0.8.nupkg.sha512",
+    "/home/bigadmin/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.8/microsoft.aspnetcore.app.ref.7.0.8.nupkg.sha512",
+    "/home/bigadmin/.nuget/packages/microsoft.netcore.app.host.linux-x64/7.0.8/microsoft.netcore.app.host.linux-x64.7.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
