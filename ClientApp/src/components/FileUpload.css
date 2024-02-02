@@ -1,0 +1,11 @@
+.ulButton {
+    background: url('../../../img/upload-icon.png');
+    background-size: 100% 100%; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+    padding: 20px 20px;
+}
+
+.ul-seg {
+    display: inline-block;
+}

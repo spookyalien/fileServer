@@ -1,0 +1,11 @@
+.dlButton {
+    background: url('../../../img/download-icon.png');
+    background-size: 100% 100%; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+    padding: 20px 20px;
+}
+
+.dl-seg {
+    display: inline-block;
+}
