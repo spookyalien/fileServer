@@ -31,7 +31,7 @@ export class FileShare extends Component
 
     populate_files()
     {
-        fetch('https://localhost:44473/api/FileUpload/files')
+        fetch('/api/FileUpload/files')
         .then(response => response.json())
         .then(data => {
             this.setState({ file_names: data });
@@ -43,7 +43,7 @@ export class FileShare extends Component
 
     get_file_count()
     {
-        fetch('https://localhost:44473/api/FileUpload')
+        fetch('/api/FileUpload')
         .then(response => response.json())
         .then(data => {
             this.setState({ file_count: data }, () => {

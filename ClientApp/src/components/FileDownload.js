@@ -6,9 +6,9 @@ const FileDownload = (props) => {
         if (props.selected.length === 0) {
             return;
         }
-        const url_param= `${"api/FileUpload/Download"}?parameter=${encodeURIComponent(props.selected)}`;
+        const url_param= `${"/api/FileUpload/Download"}?parameter=${encodeURIComponent(props.selected)}`;
 
-        fetch('https://localhost:44473/' + url_param, {
+        fetch(url_param, {
             method: 'GET',
             headers: {
                 Accept: 'application/zip',

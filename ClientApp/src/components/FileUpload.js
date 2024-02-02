@@ -18,7 +18,7 @@ const FileUpload = () => {
     formData.append("fileName", fileName);
 
     try {
-        const res = await axios.post("https://localhost:44473/api/FileUpload/Upload", formData);
+        const res = await axios.post("/api/FileUpload/Upload", formData);
         console.log(res);
     } catch (ex) {
         console.log(ex);
