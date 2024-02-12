@@ -58,10 +58,17 @@ export class FileShare extends Component
     handle_select(selected_id)
     {
         if (this.state.selected.includes(this.state.file_names[selected_id])) {
-            return;
+            document.getElementById(selected_id).style.backgroundColor='#dee2e7';
+            var select_index = this.state.selected.indexOf(this.state.file_names[selected_id]);
+            if (select_index !== -1) {
+                this.state.selected.splice(select_index, 1);
+            }      
         }
-        this.setState(prevState => ({
-                selected: [...prevState.selected, this.state.file_names[selected_id]]}));
+        else {
+            document.getElementById(selected_id).style.backgroundColor='#c2e7ff';
+            this.setState(prevState => ({
+                    selected: [...prevState.selected, this.state.file_names[selected_id]]}));
+        }
     }
 
     componentDidMount() {
@@ -76,10 +83,10 @@ export class FileShare extends Component
                 <FileUpload />
                 <FileDownload selected={this.state.selected}/>
 
-                <div className="grid" id="file_grid">
+                <div className="displayGrid" id="file_grid">
                     {this.state.grid_items.map((item) => (
                         <div key={item.id} className="grid-item">
-                            {<button type="submit" className="fileButton" onClick={() => this.handle_select(item.id)}>
+                            {<button type="submit" id={item.id} className="fileButton" onClick={() => this.handle_select(item.id)}>
                                 { this.state.file_names[item.id] } 
                             </button>}
                         </div>

@@ -7,6 +7,8 @@ namespace fileServer.Model
     {
         public string FileName { get; set; }
         public IFormFile FormFile { get; set; }
+        public int FileSize { get; set; }
+        public string FileType { get; set; }
         //public List<IFormFile> FormFiles { get; set; }
     }
 }
