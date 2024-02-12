@@ -76,11 +76,16 @@ export class FileShare extends Component
         this.get_file_count();
     }
 
+    handleFileUploaded = () => {
+        this.populate_files();
+        this.get_file_count();
+    }
+
     render()
     {
         return (
             <div>
-                <FileUpload />
+                <FileUpload onFileUploaded={this.handleFileUploaded}/>
                 <FileDownload selected={this.state.selected}/>
 
                 <div className="displayGrid" id="file_grid">
