@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace fileServer.Model
 {
+    // Currently unused but will be used to store relevant file info such as name, size, type, path, etc
     public class FileModel
     {
         public string FileName { get; set; }

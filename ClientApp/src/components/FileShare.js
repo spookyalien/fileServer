@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FileUpload from './FileUpload';
 import FileDownload from './FileDownload';
+import FileDelete from './FileDelete';
 import './FileShare.css';
 
 export class FileShare extends Component
@@ -55,19 +56,19 @@ export class FileShare extends Component
         });
     }
 
-    handle_select(selected_id)
+    handle_select(selected_opt)
     {
-        if (this.state.selected.includes(this.state.file_names[selected_id])) {
-            document.getElementById(selected_id).style.backgroundColor='#dee2e7';
-            var select_index = this.state.selected.indexOf(this.state.file_names[selected_id]);
+        if (this.state.selected.includes(selected_opt)) {
+            document.getElementById(selected_opt).style.backgroundColor='#dee2e7';
+            var select_index = this.state.selected.indexOf(selected_opt);
             if (select_index !== -1) {
                 this.state.selected.splice(select_index, 1);
             }      
         }
         else {
-            document.getElementById(selected_id).style.backgroundColor='#c2e7ff';
+            document.getElementById(selected_opt).style.backgroundColor='#c2e7ff';
             this.setState(prevState => ({
-                    selected: [...prevState.selected, this.state.file_names[selected_id]]}));
+                    selected: [...prevState.selected, selected_opt]}));
         }
     }
 
@@ -76,7 +77,7 @@ export class FileShare extends Component
         this.get_file_count();
     }
 
-    handleFileUploaded = () => {
+    handleFileChange = () => {
         this.populate_files();
         this.get_file_count();
     }
@@ -85,14 +86,18 @@ export class FileShare extends Component
     {
         return (
             <div>
-                <FileUpload onFileUploaded={this.handleFileUploaded}/>
-                <FileDownload selected={this.state.selected}/>
-
+                <div className="mainBar">
+                    <FileUpload onFileUploaded={this.handleFileChange}/>
+                    <FileDownload selected={this.state.selected}/>
+                    <FileDelete selected={this.state.selected} onFileChange={this.handleFileChange}/>
+                </div>
+                <br></br>
                 <div className="displayGrid" id="file_grid">
                     {this.state.grid_items.map((item) => (
                         <div key={item.id} className="grid-item">
-                            {<button type="submit" id={item.id} className="fileButton" onClick={() => this.handle_select(item.id)}>
+                            {<button type="submit" id={this.state.file_names[item.id]} className="fileButton" onClick={() => this.handle_select(this.state.file_names[item.id])}>
                                 { this.state.file_names[item.id] } 
+                                {console.log(this.state.selected)}
                             </button>}
                         </div>
                     ))}

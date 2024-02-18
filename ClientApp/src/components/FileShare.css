@@ -17,6 +17,11 @@
     background-color:#dee2e7;
 }
 
-.fileButton.active{
-    background:#00cc00;
-  }
+.fileButton:hover {
+    background-color:#7d7e7f;
+}
+
+.mainBar {
+    background-color: #264a80;
+    padding: 20px 20px;
+}

@@ -1,12 +1,12 @@
 import './FileDownload.css';
 
-const FileDownload = (props) => {
+const FileDownload = ({selected}) => {
  
     const download = async (e) => {
-        if (props.selected.length === 0) {
+        if (selected.length === 0) {
             return;
         }
-        const url_param= `${"/api/FileUpload/Download"}?parameter=${encodeURIComponent(props.selected)}`;
+        const url_param= `${"/api/FileUpload/Download"}?parameter=${encodeURIComponent(selected)}`;
 
         fetch(url_param, {
             method: 'GET',

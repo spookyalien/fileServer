@@ -1,11 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using fileServer.Model;
-using System;
-using System.IO;
-using Microsoft.AspNetCore.Http.Extensions;
 using System.IO.Compression;
-using Microsoft.AspNetCore.StaticFiles;
 
 namespace fileServer.Controllers
 {
@@ -13,21 +7,6 @@ namespace fileServer.Controllers
     [ApiController]
     public class FileUploadController : ControllerBase
     {  
-        public string GetMimeTypeForFileExtension(string filePath)
-        {
-            const string DefaultContentType = "application/octet-stream";
-
-            var provider = new FileExtensionContentTypeProvider();
-
-            if (!provider.TryGetContentType(filePath, out string contentType))
-            {
-                contentType = DefaultContentType;
-            }
-
-            return contentType;
-        }
-
-        [DisableRequestSizeLimit]
         [HttpPost] 
         [Route("Upload")]
         public async Task <IActionResult> ImportFile([FromForm] IFormFile form_file)
@@ -53,7 +32,8 @@ namespace fileServer.Controllers
             return Directory.EnumerateFiles(directory_path, "*").Count();    
         }
 
-        [HttpGet("port")]
+        [HttpGet]
+        [Route("port")]
         public int GetPort()
         {
             return this.HttpContext.Connection.RemotePort;
@@ -65,39 +45,46 @@ namespace fileServer.Controllers
         public ActionResult GetDownload([FromQuery] string parameter)
         {
             string[] file_names = parameter.Split(',');
-
-            if (file_names.Length <= 1) { 
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file_names[0]);
-                byte[] file_bytes = System.IO.File.ReadAllBytes(path);
-                return new FileContentResult(file_bytes, "application/octet-stream")
-                {
-                    FileDownloadName = file_names[0]
-                };
-            }
-            string zip_name = "Export_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".zip";
-            byte[] compressed_bytes;
-
-            using (var out_stream = new MemoryStream())
-            {
-                using (var archive = new ZipArchive(out_stream, ZipArchiveMode.Create, true))
-                {
-                    for (int i = 0; i < file_names.Length; i++) {
-                        string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file_names[i]);
-                        byte[] file_bytes = System.IO.File.ReadAllBytes(path);
-                        var archive_file = archive.CreateEntry(file_names[i], CompressionLevel.Optimal);
-                        using (var entry_stream = archive_file.Open())
-                        using (var fileToCompressStream = new MemoryStream(file_bytes))
-                        {
-                            fileToCompressStream.CopyTo(entry_stream);
-                        }
-                    }
+            try {
+                if (file_names.Length <= 1) { 
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file_names[0]);
+                    byte[] file_bytes = System.IO.File.ReadAllBytes(path);
+                    return new FileContentResult(file_bytes, "application/octet-stream")
+                    {
+                        FileDownloadName = file_names[0]
+                    };
                 }
-                compressed_bytes = out_stream.ToArray();
+                else {
+                    string zip_name = "Export_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".zip";
+                    byte[] compressed_bytes;
+
+                    using (var out_stream = new MemoryStream())
+                    {
+                        using (var archive = new ZipArchive(out_stream, ZipArchiveMode.Create, true))
+                        {
+                            for (int i = 0; i < file_names.Length; i++) {
+                                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file_names[i]);
+                                byte[] file_bytes = System.IO.File.ReadAllBytes(path);
+                                var archive_file = archive.CreateEntry(file_names[i], CompressionLevel.Optimal);
+                                using (var entry_stream = archive_file.Open())
+                                using (var fileToCompressStream = new MemoryStream(file_bytes))
+                                {
+                                    fileToCompressStream.CopyTo(entry_stream);
+                                }
+                            }
+                        }
+                        compressed_bytes = out_stream.ToArray();
+                    }
+                    return File(compressed_bytes, "application/zip", zip_name);
+                }
             }
-            return File(compressed_bytes, "application/zip", zip_name);
+            catch (Exception) {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        [HttpGet("files")]
+        [HttpGet]
+        [Route("Files")]
         public string[] GetFiles()
         {
             List<string> file_names = new List<string>();
@@ -113,5 +100,19 @@ namespace fileServer.Controllers
 
             return file_names.ToArray();
         }
+
+        [HttpDelete]
+        [Route("Delete")]
+        public ActionResult DeleteFile([FromQuery] string parameter)
+        {
+            string[] file_names = parameter.Split(',');
+            for (int i = 0; i < file_names.Length; i++) {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file_names[i]);
+                System.IO.File.Delete(path);
+                
+            }
+
+            return StatusCode(StatusCodes.Status200OK);
+        } 
     }
 }
