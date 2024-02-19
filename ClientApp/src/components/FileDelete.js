@@ -12,11 +12,16 @@ const FileDelete = ({selected, onFileChange}) => {
             method: 'DELETE',
        })
         .then( response => {
-                for (let i = 0; i < selected.length; i++) {
-                    document.getElementById(selected[i]).style.backgroundColor='#dee2e7';
+                try {
+                    for (let i = 0; i < selected.length; i++) {
+                        document.getElementById(selected[i]).style.backgroundColor='#dee2e7';
+                    }
+                    selected.splice(0, selected.length);
+                    onFileChange();
                 }
-                selected.splice(0, selected.length);
-                onFileChange();
+                catch (ex) {
+                    console.log(ex);
+                }
             }
        );
 

@@ -9,7 +9,7 @@ namespace fileServer.Controllers
     {  
         [HttpPost] 
         [Route("Upload")]
-        public async Task <IActionResult> ImportFile([FromForm] IFormFile form_file)
+        public async Task <IActionResult> UploadFile([FromForm] IFormFile form_file)
         {
             try {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", form_file.FileName);
@@ -90,7 +90,6 @@ namespace fileServer.Controllers
             List<string> file_names = new List<string>();
             string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
             DirectoryInfo d = new DirectoryInfo(directoryPath);
-
             FileInfo[] Files = d.GetFiles("*"); 
 
             foreach(FileInfo file in Files )
@@ -107,9 +106,8 @@ namespace fileServer.Controllers
         {
             string[] file_names = parameter.Split(',');
             for (int i = 0; i < file_names.Length; i++) {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file_names[i]);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", @file_names[i]);
                 System.IO.File.Delete(path);
-                
             }
 
             return StatusCode(StatusCodes.Status200OK);

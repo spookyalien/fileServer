@@ -97,7 +97,6 @@ export class FileShare extends Component
                         <div key={item.id} className="grid-item">
                             {<button type="submit" id={this.state.file_names[item.id]} className="fileButton" onClick={() => this.handle_select(this.state.file_names[item.id])}>
                                 { this.state.file_names[item.id] } 
-                                {console.log(this.state.selected)}
                             </button>}
                         </div>
                     ))}
